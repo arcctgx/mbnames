@@ -35,6 +35,13 @@ def to_plain_ascii(str_):
 
     return plain
 
+def normalize(str_):
+    """
+    Return a new string where the typographically correct characters
+    are changed to plain ASCII counterparts. The string is converted
+    to lower case.
+    """
+    return to_plain_ascii(str_).casefold()
 
 def contains_typographic_chars(str_):
     """
