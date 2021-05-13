@@ -23,16 +23,14 @@ def asciify(name):
     quotes, double quotes, dashes and punctuation are changed to
     their plain ASCII counterparts.
     """
-    single_quotes_tab = str.maketrans(SINGLE_QUOTES, '\''*len(SINGLE_QUOTES))
-    double_quotes_tab = str.maketrans(DOUBLE_QUOTES, '"'*len(DOUBLE_QUOTES))
-    dashes_tab = str.maketrans(DASHES, '-'*len(DASHES))
+    if not is_typographic(name):
+        return name
 
-    plain = name.translate(single_quotes_tab) \
-                .translate(double_quotes_tab) \
-                .translate(dashes_tab) \
-                .replace('\u2026', '...')
+    typographic = SINGLE_QUOTES + DOUBLE_QUOTES + DASHES
+    plain_ascii = '\''*len(SINGLE_QUOTES) + '"'*len(DOUBLE_QUOTES) + '-'*len(DASHES)
+    mapper = str.maketrans(typographic, plain_ascii)
 
-    return plain
+    return name.translate(mapper).replace('\u2026', '...')
 
 def normalize(name):
     """
@@ -44,6 +42,9 @@ def normalize(name):
 
 def cmp_normalized(name, other_name):
     """Compare two normalized names."""
+    if not is_typographic(name) and not is_typographic(other_name):
+        return name.casefold() == other_name.casefold()
+
     return normalize(name) == normalize(other_name)
 
 def is_typographic(name):
@@ -53,8 +54,8 @@ def is_typographic(name):
     """
     typographic_chars = SINGLE_QUOTES + DOUBLE_QUOTES + DASHES + PUNCTUATION
 
-    for char in typographic_chars:
-        if char in name:
+    for char in name:
+        if char in typographic_chars:
             return True
 
     return False
