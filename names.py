@@ -17,7 +17,6 @@ def is_untitled(name):
 
     return name.casefold() in untitled_patterns
 
-
 def asciify(name):
     """
     Return a new string where the typographically correct single
@@ -42,6 +41,10 @@ def normalize(name):
     to lower case.
     """
     return asciify(name).casefold()
+
+def cmp_normalized(name, other_name):
+    """Compare two normalized names."""
+    return normalize(name) == normalize(other_name)
 
 def is_typographic(name):
     """
