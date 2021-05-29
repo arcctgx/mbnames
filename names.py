@@ -59,3 +59,19 @@ def is_typographic(name):
             return True
 
     return False
+
+def replace_numbers(name):
+    """
+    Return a new string where all embedded numbers are replaced with
+    fixed pseudo-random strings. The purpose of this is to increase
+    the edit distance between track titles that differ only by numbers,
+    such as "Song Title, Part N".
+    TODO: handle Roman numerals
+    """
+    replace = { '0': 'iuxhxrugig', '1': 'odoiqlazbk', '2': 'kuqhzswjlz', '3': 'maoutyqrob',
+            '4': 'kjhlzjijzh', '5': 'yiqfvoncaw', '6': 'xamlrqeigm', '7': 'xcuijkfqmp',
+            '8': 'zohysugnvh', '9': 'qoamtosahy' }
+
+    for key, val in replace.items():
+        name = name.replace(key, val)
+    return name
