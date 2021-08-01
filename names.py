@@ -5,7 +5,7 @@ understood as names or titles.
 
 SINGLE_QUOTES = '\u2018\u2019\u201a\u201b'
 DOUBLE_QUOTES = '\u201c\u201d\u201e\u201f'
-DASHES = '\u2012\u2013\u2014\u2015'
+DASHES = '\u2010\u2012\u2013\u2014\u2015'
 PUNCTUATION = '\u2026'
 
 def is_untitled(name):
