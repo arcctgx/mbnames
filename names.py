@@ -3,10 +3,14 @@ Utility functions for working with MusicBrainz or Last.fm strings
 understood as names or titles.
 """
 
+import jellyfish
+
+
 SINGLE_QUOTES = '\u2018\u2019\u201a\u201b'
 DOUBLE_QUOTES = '\u201c\u201d\u201e\u201f'
 DASHES = '\u2010\u2012\u2013\u2014\u2015'
 PUNCTUATION = '\u2026'
+
 
 def is_untitled(name):
     """
@@ -16,6 +20,7 @@ def is_untitled(name):
     untitled_patterns = ['[untitled]', 'untitled']
 
     return name.casefold() in untitled_patterns
+
 
 def asciify(name):
     """
@@ -32,6 +37,7 @@ def asciify(name):
 
     return name.translate(mapper).replace('\u2026', '...')
 
+
 def normalize(name):
     """
     Return a new string where the typographically correct characters
@@ -40,12 +46,14 @@ def normalize(name):
     """
     return asciify(name).casefold()
 
+
 def cmp_normalized(name, other_name):
     """Compare two normalized names."""
     if not is_typographic(name) and not is_typographic(other_name):
         return name.casefold() == other_name.casefold()
 
     return normalize(name) == normalize(other_name)
+
 
 def is_typographic(name):
     """
@@ -59,6 +67,7 @@ def is_typographic(name):
             return True
 
     return False
+
 
 def replace_numbers(name):
     """
@@ -75,3 +84,16 @@ def replace_numbers(name):
     for key, val in replace.items():
         name = name.replace(key, val)
     return name
+
+
+def cmp_fuzzy_normalized_numbers(name, other_name):
+    """
+    Compare two strings using fuzzy algorithm. Both input strings are
+    converted to lower case, typographic characters are changed to ASCII
+    counterparts, and numbers are replaced with pseudo-random strings to
+    increase edit distance between strings which only differ by digits.
+    """
+    cmp_name = replace_numbers(normalize(name))
+    cmp_other_name = replace_numbers(normalize(other_name))
+
+    return jellyfish.jaro_winkler(cmp_name, cmp_other_name)
