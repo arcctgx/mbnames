@@ -3,7 +3,7 @@
 """Tests of names module."""
 
 import unittest
-from names import asciify, is_typographic
+from names import asciify, is_typographic, remove_featured
 
 
 class TestTypographyNormalization(unittest.TestCase):
@@ -27,6 +27,29 @@ class TestTypographyNormalization(unittest.TestCase):
             test_asciified = asciify(typographic)
             self.assertEqual(asciified, test_asciified)
             self.assertFalse(is_typographic(test_asciified))
+
+
+class TestRemoveFeatured(unittest.TestCase):
+
+    def test_garbage_inputs(self):
+        self.assertEqual(remove_featured('Zacier', None), 'Zacier')
+        self.assertEqual(remove_featured('Zacier', ''), 'Zacier')
+
+    def test_input_without_feat(self):
+        self.assertEqual(remove_featured('Zacier', 'feat.'), 'Zacier')
+
+    def test_inputs_with_feat(self):
+        self.assertEqual(remove_featured('Clint Mansell feat. Kronos Quartet', 'feat.'),
+                         'Clint Mansell')
+        self.assertEqual(remove_featured('Clint Mansell feat.   Kronos Quartet', 'feat.'),
+                         'Clint Mansell')
+        self.assertEqual(remove_featured('Clint Mansell   feat. Kronos Quartet', 'feat.'),
+                         'Clint Mansell')
+        self.assertEqual(remove_featured('   Clint Mansell   feat. Kronos Quartet', 'feat.'),
+                         '   Clint Mansell')
+        self.assertEqual(
+            remove_featured('Clint Mansell feat. Kronos Quartet feat. Zacier', 'feat.'),
+            'Clint Mansell')
 
 
 if __name__ == '__main__':

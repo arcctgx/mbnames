@@ -106,3 +106,18 @@ def cmp_fuzzy_normalized_numbers(name, other_name):
     cmp_other_name = replace_numbers(normalize(other_name))
 
     return jellyfish.jaro_winkler(cmp_name, cmp_other_name)
+
+
+def remove_featured(name, feat_string):
+    """
+    Discard the part of name after the first occurrence of feat_string,
+    including feat_string.
+    """
+    if feat_string is None or not feat_string:
+        return name
+
+    pos = name.find(feat_string)
+    if pos == -1:
+        return name
+
+    return name[:pos].rstrip()
