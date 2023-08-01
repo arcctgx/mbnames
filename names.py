@@ -68,7 +68,7 @@ def is_typographic(name):
     return False
 
 
-def replace_numbers(name):
+def replace_numbers(name, repeat=48):
     """
     Return a new string where all embedded numbers are replaced with
     fixed long sequences of letters which differ from one another in
@@ -78,16 +78,16 @@ def replace_numbers(name):
     TODO: handle Roman numerals
     """
     replace = {
-        '0': 'a' * 48,
-        '1': 'b' * 48,
-        '2': 'c' * 48,
-        '3': 'd' * 48,
-        '4': 'e' * 48,
-        '5': 'f' * 48,
-        '6': 'g' * 48,
-        '7': 'h' * 48,
-        '8': 'i' * 48,
-        '9': 'j' * 48
+        '0': 'a' * repeat,
+        '1': 'b' * repeat,
+        '2': 'c' * repeat,
+        '3': 'd' * repeat,
+        '4': 'e' * repeat,
+        '5': 'f' * repeat,
+        '6': 'g' * repeat,
+        '7': 'h' * repeat,
+        '8': 'i' * repeat,
+        '9': 'j' * repeat
     }
 
     for key, val in replace.items():
