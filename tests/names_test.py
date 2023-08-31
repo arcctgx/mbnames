@@ -3,7 +3,7 @@
 """Tests of names module."""
 
 import unittest
-from names import asciify, is_typographic, remove_featured
+from mbnames import asciify, is_typographic, remove_featured
 
 
 class TestTypographyNormalization(unittest.TestCase):

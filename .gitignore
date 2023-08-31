@@ -1,4 +1,8 @@
 __pycache__
 *.pyc
 
+build
+dist
+mbnames.egg-info
+
 .vscode
