@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 """Tests of names module."""
 
 import unittest
