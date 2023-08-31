@@ -95,7 +95,7 @@ def replace_numbers(name: str, repeat: int = 10) -> str:
     return name
 
 
-def cmp_fuzzy_normalized_numbers(name: str, other_name: str) -> float:
+def cmp_normalized_fuzzy(name: str, other_name: str) -> float:
     """
     Compare two strings using fuzzy algorithm. Both input strings are
     converted to lower case, typographic characters are changed to ASCII
