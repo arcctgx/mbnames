@@ -1,6 +1,6 @@
 """
-Utility functions for working with MusicBrainz or Last.fm strings
-understood as names or titles.
+Utility functions for working with MusicBrainz or Last.fm artist credit
+and title strings.
 """
 
 import jellyfish
