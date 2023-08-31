@@ -11,7 +11,7 @@ DASHES = '\u2010\u2012\u2013\u2014\u2015'
 PUNCTUATION = '\u2026'
 
 
-def is_untitled(name):
+def is_untitled(name: str) -> bool:
     """
     Check if the argument string matches any of the "untitled"
     patterns. The comparison is case insensitive.
@@ -21,7 +21,7 @@ def is_untitled(name):
     return name.casefold() in untitled_patterns
 
 
-def asciify(name):
+def asciify(name: str) -> str:
     """
     Return a new string where the typographically correct single
     quotes, double quotes, dashes and punctuation are changed to
@@ -37,7 +37,7 @@ def asciify(name):
     return name.translate(mapper).replace('\u2026', '...')
 
 
-def normalize(name):
+def normalize(name: str) -> str:
     """
     Return a new string where the typographically correct characters
     are changed to plain ASCII counterparts. The string is converted
@@ -46,7 +46,7 @@ def normalize(name):
     return asciify(name).casefold()
 
 
-def cmp_normalized(name, other_name):
+def cmp_normalized(name: str, other_name: str) -> bool:
     """Compare two normalized names."""
     if not is_typographic(name) and not is_typographic(other_name):
         return name.casefold() == other_name.casefold()
@@ -54,7 +54,7 @@ def cmp_normalized(name, other_name):
     return normalize(name) == normalize(other_name)
 
 
-def is_typographic(name):
+def is_typographic(name: str) -> bool:
     """
     Check if the argument string contains typographically correct,
     non-ASCII single quotes, double quotes, dashes or punctuation.
@@ -68,7 +68,7 @@ def is_typographic(name):
     return False
 
 
-def replace_numbers(name, repeat=10):
+def replace_numbers(name: str, repeat: int = 10) -> str:
     """
     Return a new string where all embedded numbers are replaced with
     fixed long sequences of letters which differ from one another in
@@ -95,7 +95,7 @@ def replace_numbers(name, repeat=10):
     return name
 
 
-def cmp_fuzzy_normalized_numbers(name, other_name):
+def cmp_fuzzy_normalized_numbers(name: str, other_name: str) -> float:
     """
     Compare two strings using fuzzy algorithm. Both input strings are
     converted to lower case, typographic characters are changed to ASCII
@@ -108,7 +108,7 @@ def cmp_fuzzy_normalized_numbers(name, other_name):
     return jellyfish.jaro_winkler(cmp_name, cmp_other_name)
 
 
-def remove_featured(name, feat_string):
+def remove_featured(name: str, feat_string: str) -> str:
     """
     Discard the part of name after the first occurrence of feat_string,
     including feat_string.
