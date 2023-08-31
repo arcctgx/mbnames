@@ -5,10 +5,10 @@ and title strings.
 
 import jellyfish
 
-SINGLE_QUOTES = '\u2018\u2019\u201a\u201b'
-DOUBLE_QUOTES = '\u201c\u201d\u201e\u201f\u2033'
-DASHES = '\u2010\u2012\u2013\u2014\u2015'
-PUNCTUATION = '\u2026'
+_SINGLE_QUOTES = '\u2018\u2019\u201a\u201b'
+_DOUBLE_QUOTES = '\u201c\u201d\u201e\u201f\u2033'
+_DASHES = '\u2010\u2012\u2013\u2014\u2015'
+_PUNCTUATION = '\u2026'
 
 
 def is_untitled(name: str) -> bool:
@@ -30,8 +30,8 @@ def asciify(name: str) -> str:
     if not is_typographic(name):
         return name
 
-    typographic = SINGLE_QUOTES + DOUBLE_QUOTES + DASHES
-    plain_ascii = '\'' * len(SINGLE_QUOTES) + '"' * len(DOUBLE_QUOTES) + '-' * len(DASHES)
+    typographic = _SINGLE_QUOTES + _DOUBLE_QUOTES + _DASHES
+    plain_ascii = '\'' * len(_SINGLE_QUOTES) + '"' * len(_DOUBLE_QUOTES) + '-' * len(_DASHES)
     mapper = str.maketrans(typographic, plain_ascii)
 
     return name.translate(mapper).replace('\u2026', '...')
@@ -59,7 +59,7 @@ def is_typographic(name: str) -> bool:
     Check if the argument string contains typographically correct,
     non-ASCII single quotes, double quotes, dashes or punctuation.
     """
-    typographic_chars = SINGLE_QUOTES + DOUBLE_QUOTES + DASHES + PUNCTUATION
+    typographic_chars = _SINGLE_QUOTES + _DOUBLE_QUOTES + _DASHES + _PUNCTUATION
 
     for char in name:
         if char in typographic_chars:
