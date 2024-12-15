@@ -1,7 +1,11 @@
 """Tests of names module."""
 
 import unittest
+
 from mbnames import asciify, is_typographic, remove_featured
+
+# pylint: disable=missing-class-docstring
+# pylint: disable=missing-function-docstring
 
 
 class TestTypographyNormalization(unittest.TestCase):
