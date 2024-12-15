@@ -3,6 +3,8 @@ Utility functions for working with MusicBrainz or Last.fm artist credit
 and title strings.
 """
 
+from typing import Optional
+
 _SINGLE_QUOTES = '\u2018\u2019\u201a\u201b'
 _DOUBLE_QUOTES = '\u201c\u201d\u201e\u201f\u2033'
 _DASHES = '\u2010\u2012\u2013\u2014\u2015'
@@ -58,7 +60,7 @@ def is_typographic(name: str) -> bool:
     return False
 
 
-def remove_featured(name: str, feat_string: str) -> str:
+def remove_featured(name: str, feat_string: Optional[str]) -> str:
     """
     Discard the part of name after the first occurrence of feat_string,
     including feat_string.
