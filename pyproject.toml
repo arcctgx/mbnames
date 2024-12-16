@@ -17,7 +17,7 @@ license = { text = "GPLv3" }
 Homepage = "https://github.com/arcctgx/mbnames"
 
 [tool.setuptools.packages.find]
-where = ["."]
+where = ["src"]
 
 [[tool.mypy.overrides]]
 module = ["jellyfish"]

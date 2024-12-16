@@ -1,18 +1,15 @@
-.PHONY: all test bdist sdist wheel clean
+.PHONY: release test sdist wheel clean
 
-all: bdist sdist wheel
+release: sdist wheel
 
 test:
 	python3 -m unittest discover -v -s tests/ -p "*_test.py"
 
-bdist:
-	python3 setup.py bdist
-
 sdist:
-	python3 setup.py sdist
+	python3 -m build --sdist
 
 wheel:
-	python3 setup.py bdist_wheel
+	python3 -m build --wheel
 
 clean:
-	$(RM) -r build dist mbnames.egg-info mbnames/__pycache__ tests/__pycache__
+	$(RM) -r build dist src/mbnames.egg-info src/mbnames/__pycache__ tests/__pycache__
