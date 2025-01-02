@@ -51,4 +51,4 @@ def cmp_normalized_fuzzy(name: str, other_name: str) -> float:
     cmp_name = replace_numbers(normalize(name))
     cmp_other_name = replace_numbers(normalize(other_name))
 
-    return jellyfish.jaro_winkler(cmp_name, cmp_other_name)
+    return jellyfish.jaro_winkler_similarity(cmp_name, cmp_other_name)

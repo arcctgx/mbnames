@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "mbnames"
 version = "v1.0.0"
-dependencies = ["jellyfish"]
+dependencies = ["jellyfish>=0.8.2"]
 
 authors = [{ name = "arcctgx", email = "arcctgx@o2.pl" }]
 
