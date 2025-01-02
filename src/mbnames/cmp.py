@@ -1,6 +1,6 @@
 """String comparison and related functions."""
 
-import jellyfish
+from jellyfish import jaro_winkler_similarity
 
 from mbnames.names import is_typographic, normalize
 
@@ -41,6 +41,20 @@ def cmp_normalized(name: str, other_name: str) -> bool:
     return normalize(name) == normalize(other_name)
 
 
+def cmp_fuzzy(name: str, other_name: str) -> float:
+    """
+    Compare two strings using a fuzzy matching algorithm. Return a floating
+    point value between 0.0 and 1.0, where 0.0 indicates no similarity and
+    1.0 indicates an exact match.
+
+    This is a thin wrapper around a function provided by a third-party library.
+    The idea is to have only one place which references a third-party function.
+    This will make it easy to consistently change the fuzzy comparison method
+    across the code.
+    """
+    return jaro_winkler_similarity(name, other_name)
+
+
 def cmp_normalized_fuzzy(name: str, other_name: str) -> float:
     """
     Compare two strings using fuzzy algorithm. Both input strings are
@@ -51,4 +65,4 @@ def cmp_normalized_fuzzy(name: str, other_name: str) -> float:
     cmp_name = replace_numbers(normalize(name))
     cmp_other_name = replace_numbers(normalize(other_name))
 
-    return jellyfish.jaro_winkler_similarity(cmp_name, cmp_other_name)
+    return cmp_fuzzy(cmp_name, cmp_other_name)
